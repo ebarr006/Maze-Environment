@@ -2,20 +2,21 @@
 #include "cell.h"
 
 using namespace std;
-
-unsigned int n = 0;
-unsigned int z = 0;
+//       0
+//    +----+
+//  3 | 10 | 1
+//    +----+
+//       2
 
 Cell::Cell() {
   top = false;
   right = false;
   bot = false;
   left = false;
-  marked = false;
+  // face = 0;
 }
 
 bool Cell::isTop() {
-  // cout << "oh \n";
   return top;
 }
 
@@ -29,10 +30,6 @@ bool Cell::isBot() {
 
 bool Cell::isLeft() {
   return left;
-}
-
-bool Cell::isMarked() {
-  return marked;
 }
 
 void Cell::setTop(int z) {
@@ -66,16 +63,20 @@ void Cell::setLeft(int z) {
     left = false;
 }
 
-void Cell::mark() {
-  marked = true;
-}
-
 void Cell::printTop() {
-  ++n;
   cout << "+";
   if (top) {
     cout << "---";
-    // cout << "-" << n << "-";
+  }
+  else {
+    cout << "   ";
+  }
+}
+
+void Cell::printBot() {
+  cout << "+";
+  if (bot) {
+    cout << "---";
   }
   else {
     cout << "   ";
@@ -89,7 +90,28 @@ void Cell::printLeft() {
   else {
     cout << "    ";
   }
-}
+}   // 4 spaces total
+
+void Cell::printWithChar() {
+  if (left) {
+    cout << "|";
+  }
+  else {                          // with/without a wall. if there print it, if not its a space
+    cout << " ";
+  }
+  // if (face == 0) {
+  //   cout << " ^ ";
+  // }
+  // else if (face == 1) {
+  //   cout << " > ";
+  // }
+  // else if (face == 2) {
+  //   cout << " v ";
+  // }
+  // else if (face == 3) {
+  //   cout << " < ";
+  // }
+}     // 4 spaces total
 
 void Cell::printRight() {
   //cout << "here\n";
@@ -98,34 +120,10 @@ void Cell::printRight() {
   }
 }
 
-void Cell::printMid() {
-  if (left) {
-    cout << "|   ";
-  }
-
-
-
-  // if (!left && !right) {
-  //   cout << "    ";
-  // }
-  // else if (left && !right) {
-  //   cout << "|    ";
-  // }
-  // else if (!left && right) {
-  //   cout << "    |";
-  // }
-  // else if (left && right) {
-  //   cout << "|   |";
-  // }
-}
-
-void Cell::printBot() {
-  //++z;
-  cout << "+";
-  if (bot) {
-    cout << "---"; // << z;
-  }
-  else {
-    cout << "   ";
-  }
-}
+// void Cell::setFace(int m) {
+//   face = m;
+// }
+//
+// int Cell::returnFace() {
+//   return face;
+// }

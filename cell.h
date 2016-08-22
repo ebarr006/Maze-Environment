@@ -4,12 +4,12 @@
 using namespace std;
 
 class Cell {
-protected:
+  protected:
     bool top;
     bool right;
     bool bot;
     bool left;
-    bool marked;
+    // int face;
 
   public:
     Cell();
@@ -17,20 +17,20 @@ protected:
     bool isRight();
     bool isBot();
     bool isLeft();
-    bool isMarked();    // refers to if it has been printed or not
 
     void setTop(int);
     void setRight(int);
     void setBot(int);
     void setLeft(int);
-    void mark();
 
     void printTop();
     void printBot();
     void printLeft();
+    void printWithChar();
     void printRight();
 
-    void printMid();
+    void setFace(int);
+    int returnFace();
 };
 
 #endif
