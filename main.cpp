@@ -19,21 +19,26 @@ void delayProgram(double secondsToDelay)
 }
 
 int main() {
-  unsigned int count = 0;
-  cout << "THIS WILL WORK\n";
-  Maze m1;
-  int a = 0;
-  while (count < 50) {
-    m1.displayMaze();
-    m1.peripherals();
-    a = m1.logic();
-    m1.rotate(a);
-    m1.displayMaze();
-    m1.moveMouse(a);
+  // unsigned int count = 0;
+  // cout << "THIS WILL WORK\n";
+  // Maze m1;
+  // int a = 0;
+  // while (count < 50) {
+  //   m1.displayMaze();
+  //   m1.peripherals();
+  //   a = m1.logic();
+  //   m1.rotate(a);
+  //   m1.displayMaze();
+  //   m1.moveMouse(a);
+  //
+  //   delayProgram(0.25);
+  //   ++count;
+  // }
 
-    delayProgram(0.25);
-    ++count;
-  }
+  Maze m1;
+  m1.inputMaze();          // change pmaze to reference
+  m1.displayMaze();
+
   return 0;
 }
 
