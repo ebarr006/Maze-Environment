@@ -22,6 +22,7 @@ class Maze {
     int logic();
     void moveMouse(int);
     void rotate(int);
+    void inputMaze();
 };
 
 #endif
