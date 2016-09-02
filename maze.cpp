@@ -1,6 +1,7 @@
 #include <iostream>
 #include <ctime>
 #include <cstdlib>
+#include <fstream>
 #include "maze.h"
 #include "cell.h"
 
@@ -312,4 +313,45 @@ void Maze::moveMouse(int d) {
 
 void Maze::rotate(int r) {
   face = r;
+}
+
+void Maze::inputMaze() {
+  ifstream file;
+  int status = 0; int i = 0; int j = 0;
+  file.open("maze.txt");
+  while ((i != 16) && (j != 16)) {
+    file >> status;
+    switch (status) {
+      case 0:             // 00
+        break;
+      case 1:             // 01
+        pmaze[i][j].setTop(1);
+        if (i != 0) {
+          pmaze[i-1][j].setBot(1);
+        }
+        break;
+      case 10:            // 10
+        pmaze[i][j].setLeft(1);
+        if (j != 0) {
+          pmaze[i][j-1].setRight(1);
+        }
+        break;
+      case 11:
+        pmaze[i][j].setLeft(1);
+        pmaze[i][j].setTop(1);
+        if (j != 0) {
+          pmaze[i][j-1].setRight(1);
+        }
+        if (i != 0) {
+          pmaze[i-1][j].setBot(1);
+        }
+        break;
+    }
+    ++j;
+    if (j == 16) {
+      j = 0;
+      ++i;
+    }
+  }
+  cout << "here" << endl;
 }
