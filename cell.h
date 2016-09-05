@@ -9,6 +9,7 @@ class Cell {
     bool right;
     bool bot;
     bool left;
+    bool found;
     // int face;
 
   public:
@@ -31,6 +32,9 @@ class Cell {
 
     void setFace(int);
     int returnFace();
+
+    void setDiscovered();
+    bool isDiscovered();
 };
 
 #endif
