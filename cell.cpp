@@ -13,6 +13,7 @@ Cell::Cell() {
   right = false;
   bot = false;
   left = false;
+  found = false;
   // face = 0;
 }
 
@@ -98,20 +99,8 @@ void Cell::printWithChar() {
   }
   else {                          // with/without a wall. if there print it, if not its a space
     cout << " ";
-  }
-  // if (face == 0) {
-  //   cout << " ^ ";
-  // }
-  // else if (face == 1) {
-  //   cout << " > ";
-  // }
-  // else if (face == 2) {
-  //   cout << " v ";
-  // }
-  // else if (face == 3) {
-  //   cout << " < ";
-  // }
-}     // 4 spaces total
+  }     // 4 spaces total
+}
 
 void Cell::printRight() {
   //cout << "here\n";
@@ -120,10 +109,10 @@ void Cell::printRight() {
   }
 }
 
-// void Cell::setFace(int m) {
-//   face = m;
-// }
-//
-// int Cell::returnFace() {
-//   return face;
-// }
+void Cell::setDiscovered() {
+  found = true;
+}
+
+bool Cell::isDiscovered() {
+  return found;
+}

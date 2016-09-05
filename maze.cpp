@@ -32,35 +32,11 @@ Maze::Maze() {
   }
   iPos = 15;
   jPos = 0;
-  a = -1;
-  b = -1;
-  c = -1;
+  a = -1; b = -1; c = -1;
+  d = -1; e = -1; f = -1;
   face = 0;
 
-
-  rmaze[15][0].setRight(1);
-  rmaze[15][1].setLeft(1);
-
-  rmaze[14][0].setRight(1);
-  rmaze[14][1].setRight(1);
-
-  // try dead end alley
-
   displayMaze();
-  // Do not .setRight(int) on any cells that are not the right hand wall.
-  //
-  // pmaze[0][2].setTop(1);
-  // pmaze[0][3].setLeft(1);
-  // pmaze[0][4].setLeft(1);
-  // pmaze[7][7].setTop(1);
-  // pmaze[15][5].setBot(1);
-  // pmaze[15][0].setBot(1);
-  //
-  //
-  //
-  // // READ ME EXAMPLE 1.1
-  // // will set left wall at [0][6] as well as right wall of [0][5]
-  // pmaze[0][6].setLeft(1);
 }
 
 
@@ -133,6 +109,9 @@ void Maze::peripherals() {
       else if (!(rmaze[iPos][jPos].isLeft())) {
         a = 3;    // option 3 is submitted to temp holder
       }
+      if (!rmaze[iPos][jPos].isLeft() && !rmaze[iPos][jPos-1].isDiscovered()) {
+        d = 3;
+      }
 
       if (rmaze[iPos][jPos].isTop()) {
         pmaze[iPos][jPos].setTop(1);
@@ -144,6 +123,9 @@ void Maze::peripherals() {
       else if (!(rmaze[iPos][jPos].isTop())) {
         b = 0;    // option 0 is submitted to temp holder
       }
+      if (!rmaze[iPos][jPos].isTop() && !rmaze[iPos-1][jPos].isDiscovered()) {
+        e = 0;
+      }
 
       if (rmaze[iPos][jPos].isRight()) {
         pmaze[iPos][jPos].setRight(1);
@@ -154,6 +136,9 @@ void Maze::peripherals() {
       }
       else if (!(rmaze[iPos][jPos].isRight())) {
         c = 1;
+      }
+      if ((!(rmaze[iPos][jPos].isRight())) && (!(rmaze[iPos][jPos+1].isDiscovered()))) {
+        f = 1;
       }
       break;
 
@@ -168,6 +153,9 @@ void Maze::peripherals() {
       else if (!(rmaze[iPos][jPos].isTop())) {
         a = 0;
       }
+      if ((!(rmaze[iPos][jPos].isTop())) && (!(rmaze[iPos-1][jPos].isDiscovered()))) {
+        d = 0;
+      }
 
       if (rmaze[iPos][jPos].isRight()) {
         pmaze[iPos][jPos].setRight(1);
@@ -179,6 +167,9 @@ void Maze::peripherals() {
       else if (!(rmaze[iPos][jPos].isRight())) {
         b = 1;
       }
+      if ((!(rmaze[iPos][jPos].isRight())) && (!(rmaze[iPos][jPos+1].isDiscovered()))) {
+        e = 1;
+      }
 
       if (rmaze[iPos][jPos].isBot()) {
         pmaze[iPos][jPos].setBot(1);
@@ -189,6 +180,9 @@ void Maze::peripherals() {
       }
       else if (!(rmaze[iPos][jPos].isBot())) {
         c = 2;
+      }
+      if ((!(rmaze[iPos][jPos].isBot())) && (!(rmaze[iPos+1][jPos].isDiscovered()))) {
+        f = 2;
       }
       break;
 
@@ -203,6 +197,9 @@ void Maze::peripherals() {
       else if (!(rmaze[iPos][jPos].isRight())) {
         a = 1;
       }
+      if ((!(rmaze[iPos][jPos].isRight())) && (!(rmaze[iPos][jPos+1].isDiscovered()))) {
+        d = 1;
+      }
 
       if (rmaze[iPos][jPos].isBot()) {
         pmaze[iPos][jPos].setBot(1);
@@ -214,6 +211,9 @@ void Maze::peripherals() {
       else if (!(rmaze[iPos][jPos].isBot())) {
         b = 2;
       }
+      if ((!(rmaze[iPos][jPos].isBot())) && (!(rmaze[iPos+1][jPos].isDiscovered()))) {
+        e = 2;
+      }
 
       if (rmaze[iPos][jPos].isLeft()) {
         pmaze[iPos][jPos].setLeft(1);
@@ -224,6 +224,9 @@ void Maze::peripherals() {
       }
       else if (!(rmaze[iPos][jPos].isLeft())) {
         c = 3;
+      }
+      if ((!(rmaze[iPos][jPos].isLeft())) && (!(rmaze[iPos][jPos-1].isDiscovered()))) {
+        f = 3;
       }
       break;
 
@@ -238,6 +241,9 @@ void Maze::peripherals() {
       else if (!(rmaze[iPos][jPos].isBot())) {
         a = 2;
       }
+      if ((!(rmaze[iPos][jPos].isBot())) && (!(rmaze[iPos+1][jPos].isDiscovered()))) {
+        d = 2;
+      }
 
       if (rmaze[iPos][jPos].isLeft()) {
         pmaze[iPos][jPos].setLeft(1);
@@ -248,6 +254,9 @@ void Maze::peripherals() {
       }
       else if (!(rmaze[iPos][jPos].isLeft())) {
         b = 3;
+      }
+      if ((!(rmaze[iPos][jPos].isLeft())) && (!(rmaze[iPos][jPos-1].isDiscovered()))) {
+        e = 3;
       }
 
       if (rmaze[iPos][jPos].isTop()) {
@@ -260,20 +269,48 @@ void Maze::peripherals() {
       else if (!(rmaze[iPos][jPos].isTop())) {
         c = 0;
       }
+      if ((!(rmaze[iPos][jPos].isTop())) && (!(rmaze[iPos-1][jPos].isDiscovered()))) {
+        f = 0;
+      }
       break;
   }
   cout << "a: " << a << "   b: " << b << "   c: " << c << endl;
 }
 
 int Maze::logic() {
-  // randomly chooses left, right, or straight
+  // for u-turns
+  if ((a == -1) && (b == -1) && (c == -1)) {
+    if (face == 0 || face == 1) {
+      face += 2;
+    }
+    else if (face == 2 || face == 3) {
+      face -= 2;
+    }
+    return face;
+  }
+
+  // priority held for undiscovered paths
   srand(time(0));
-
-  // if an option is labeled -1, it won't be selected within the while loop
-  // because of the range for rand()
-
   int select = -1;
   int result = -1;
+  while (result == -1) {
+    if (d == -1 && e == -1 && f == -1) {
+      break;
+    }
+    select = rand() % 4;      // later may have to change to 5 to include 4 (u-turns)
+    cout << "here" << endl;
+    if (d == select || e == select || f == select) {
+      result = select;
+      cout << "undiscovered select: " << select << endl;
+      return select;
+    }
+  }
+
+  // randomly chooses left, right, or straight
+  // if an option is labeled -1, it won't be selected within the while loop
+  // because of the range for rand()
+  select = -1;
+  result = -1;
   while (result == -1) {
     select = rand() % 4;      // later may have to change to 5 to include 4 (u-turns)
     cout << "select: " << select << endl;
@@ -288,13 +325,13 @@ int Maze::logic() {
   return result;
 }
 
-void Maze::moveMouse(int d) {
+void Maze::moveMouse(int z) {
   // depending on orientation, move mouse to path provided by logic()
   // increment/decrement iPos/jPos accordingly, change face if needed
   cout << "before: " << iPos << ", " << jPos << endl;
-  cout << "facing: " << d << endl;
-  face = d;
-  switch (d) {
+  cout << "facing: " << z << endl;
+  face = z;
+  switch (z) {
     case 0:
       --iPos;
       break;
@@ -309,6 +346,8 @@ void Maze::moveMouse(int d) {
       break;
   }
   cout << "after: " << iPos << ", " << jPos << endl;
+  rmaze[iPos][jPos].setDiscovered();
+  d = -1; e = -1; f = -1;     // reset the undiscovered placeholders
 }
 
 void Maze::rotate(int r) {
@@ -317,7 +356,7 @@ void Maze::rotate(int r) {
 
 void Maze::inputMaze() {
   ifstream file;
-  int status = 0; int i = 0; int j = 0;
+  int status = 0; int i = 0; int j = 0; char c;
   file.open("maze.txt");
   while ((i != 16) && (j != 16)) {
     file >> status;
@@ -325,25 +364,25 @@ void Maze::inputMaze() {
       case 0:             // 00
         break;
       case 1:             // 01
-        pmaze[i][j].setTop(1);
+        rmaze[i][j].setTop(1);
         if (i != 0) {
-          pmaze[i-1][j].setBot(1);
+          rmaze[i-1][j].setBot(1);
         }
         break;
       case 10:            // 10
-        pmaze[i][j].setLeft(1);
+        rmaze[i][j].setLeft(1);
         if (j != 0) {
-          pmaze[i][j-1].setRight(1);
+          rmaze[i][j-1].setRight(1);
         }
         break;
       case 11:
-        pmaze[i][j].setLeft(1);
-        pmaze[i][j].setTop(1);
+        rmaze[i][j].setLeft(1);
+        rmaze[i][j].setTop(1);
         if (j != 0) {
-          pmaze[i][j-1].setRight(1);
+          rmaze[i][j-1].setRight(1);
         }
         if (i != 0) {
-          pmaze[i-1][j].setBot(1);
+          rmaze[i-1][j].setBot(1);
         }
         break;
     }
@@ -353,5 +392,78 @@ void Maze::inputMaze() {
       ++i;
     }
   }
-  cout << "here" << endl;
+
+  cout << "Display imported sample? ";
+  cin >> c;
+
+  if (c == 'y') {
+    for (unsigned i = 0 ; i < 16; ++i)
+    {
+      for (unsigned k = 0; k < 2; ++k)
+      {
+        for (unsigned j = 0; j < 16; ++j)
+        {
+          if (k == 0) {
+            rmaze[i][j].printTop();
+            if (j == 15) {
+              cout << "+";
+            }
+          }
+          else if (k == 1) {
+            if ((i == iPos) && (j == jPos)) {
+              rmaze[i][j].printWithChar();
+              if (face == 0) {
+                cout << " ^ ";
+              }
+              else if (face == 1) {
+                cout << " > ";
+              }
+              else if (face == 2) {
+                cout << " v ";
+              }
+              else if (face == 3) {
+                cout << " < ";
+              }
+            }
+            else {
+              rmaze[i][j].printLeft();
+            }
+            if (j == 15 && (pmaze[i][j].isRight())) {
+              rmaze[i][j].printRight();
+            }
+          }
+        }
+        cout << endl;
+      }
+      if (i == 15) {
+        for (unsigned n = 0; n < 16; ++n)
+        {
+          rmaze[i][n].printBot();
+        }
+        cout << "+";    // last corner, bottom right
+      }
+    }
+    cout << endl << endl;
+  }
+  else {
+    cout << "Beginning search" << endl;
+  }
+
+}
+
+bool Maze::isCenter() {
+  if (iPos == 7 && jPos == 7) {
+    return true;
+  }
+  if (iPos == 7 && jPos == 8) {
+    return true;
+  }
+  if (iPos == 8 && jPos == 7) {
+    return true;
+  }
+  if (iPos == 8 && jPos == 8) {
+    return true;
+  }
+  else
+    return false;
 }
