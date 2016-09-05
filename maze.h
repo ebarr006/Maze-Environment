@@ -12,7 +12,7 @@ class Maze {
     Cell rmaze[16][16];
     int iPos;
     int jPos;
-    int a, b, c;      // palceholders for available options
+    int a, b, c, d, e, f;      // palceholders for available options
     int face;
 
   public:
@@ -23,6 +23,7 @@ class Maze {
     void moveMouse(int);
     void rotate(int);
     void inputMaze();
+    bool isCenter();
 };
 
 #endif
