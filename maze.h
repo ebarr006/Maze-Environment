@@ -24,6 +24,8 @@ class Maze {
     void rotate(int);
     void inputMaze();
     bool isCenter();
+
+    void printImport();
 };
 
 #endif
