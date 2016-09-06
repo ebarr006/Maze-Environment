@@ -15,7 +15,7 @@ To accomodate for the far bottom walls and far right column walls, the Maze defa
 
 
 <pre>+---+---+---+
-|   |   |   |
+|       |   |
 +   +---+   +
 |   |   |   |
 +   +   +   +
