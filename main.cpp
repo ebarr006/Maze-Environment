@@ -18,18 +18,9 @@ void delayProgram(double secondsToDelay)
     }
 }
 
-<<<<<<< HEAD
 void randomSearch() {
   Maze m1;
   m1.inputMaze();
-=======
-int main() {
-
-  Maze m1;
-  m1.inputMaze();          // change pmaze to reference
-  m1.displayMaze();
-  cout << "THIS WILL WORK\n";
->>>>>>> 968c9af141cad5243cadea40f9eed31fa7ef6473
   int a = 0;
   while (!m1.isCenter()) {
     m1.displayMaze();
@@ -41,15 +32,11 @@ int main() {
     delayProgram(0.25);
   }
   m1.printImport();
-<<<<<<< HEAD
 }
 
 int main() {
   randomSearch();
-  
-=======
 
->>>>>>> 968c9af141cad5243cadea40f9eed31fa7ef6473
   return 0;
 }
 
