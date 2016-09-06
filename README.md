@@ -6,7 +6,7 @@ A terminal simulation for testing micromouse maze solving algorithms. Sample maz
 The current version only uses a random search approach. I am currently working on a floodfill algorithm to implement. Once finished, the program will allow users to choose a random search, flood fill, or an algorithm of that they have added.
 
 ### Importing Sample Mazes
-This text file depicts a sample maze by representing each cell with a binary combination. Find a sample maze you would like to import. Starting with the top left cell, translate the sample maze in maze.txt by writing a 1, wall is present, or 0, wall is not present, for the left wall and then the top wall. Each cell should be represented by 2 digits in the text file.
+maze.txt depicts a sample maze by representing each cell with a binary combination. Find a sample maze you would like to import. Starting with the top left cell, translate the sample maze into maze.txt by writing a 1, wall is present, or 0, wall is not present, for the left wall and then the top wall. Each cell should be represented by 2 digits in the text file.
 
 **NOTE:** The left digit **MUST** represent the left wall and the right digit **MUST** represent the top wall.
 To accomodate for the far bottom walls and far right column walls, the Maze default constructor sets them for you. 
