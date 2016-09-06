@@ -26,7 +26,7 @@ To accomodate for the far bottom walls and far right column walls, the Maze defa
 
 
 Starting with the top left cell, there is a left wall and top wall present. So in maze.txt my first cell would be written 11.
-The next cell to the right has no left wall (0) but it does have a top wall(1). So it would be written as 01. Following this pattern for each cell, the following sample maze would be translated to:
+The next cell to the right has no left wall (0) but it *does* have a top wall(1). So it would be written as 01. Following this pattern for each cell, the following sample maze would be translated to:
 
 <pre>11 01 11
 10 11 10
