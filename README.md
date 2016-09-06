@@ -13,19 +13,15 @@ To accomodate for the far bottom walls and far right column walls, the Maze defa
 ### Example
 
 
-`+---+---+---+`
+<pre>+---+---+---+</pre>
+<pre>|   |   |   |</pre>
+<pre>+   +---+   +</pre>
+<pre>|   |   |   |</pre>
+<pre>+   +   +   +</pre>
+<pre>|       |   |</pre>
+<pre>+---+---+---+</pre>
 
-`|       |   |`
 
-`+   +---+   +`
-
-`|   |   |   |`
-
-`+   +   +   +`
-
-`|       |   |`
-
-`+---+---+---+`
 
 
 Starting with the top left cell, there is a left wall and top wall present. So in maze.txt my first cell would be written 11.
