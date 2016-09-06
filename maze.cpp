@@ -356,7 +356,7 @@ void Maze::rotate(int r) {
 
 void Maze::inputMaze() {
   ifstream file;
-  int status = 0; int i = 0; int j = 0; char c;
+  int status = 0; int i = 0; int j = 0;// char c;
   file.open("maze.txt");
   while ((i != 16) && (j != 16)) {
     file >> status;
@@ -392,7 +392,27 @@ void Maze::inputMaze() {
       ++i;
     }
   }
+}
 
+bool Maze::isCenter() {
+  if (iPos == 7 && jPos == 7) {
+    return true;
+  }
+  if (iPos == 7 && jPos == 8) {
+    return true;
+  }
+  if (iPos == 8 && jPos == 7) {
+    return true;
+  }
+  if (iPos == 8 && jPos == 8) {
+    return true;
+  }
+  else
+    return false;
+}
+
+void Maze::printImport() {
+  char c;
   cout << "Display imported sample? ";
   cin >> c;
 
@@ -446,24 +466,6 @@ void Maze::inputMaze() {
     cout << endl << endl;
   }
   else {
-    cout << "Beginning search" << endl;
+    cout << "Fin" << endl;
   }
-
-}
-
-bool Maze::isCenter() {
-  if (iPos == 7 && jPos == 7) {
-    return true;
-  }
-  if (iPos == 7 && jPos == 8) {
-    return true;
-  }
-  if (iPos == 8 && jPos == 7) {
-    return true;
-  }
-  if (iPos == 8 && jPos == 8) {
-    return true;
-  }
-  else
-    return false;
 }
