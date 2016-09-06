@@ -11,21 +11,35 @@ This text file depicts a sample maze by representing each cell with a binary com
 To accomodate for the far bottom walls and far right column walls, the Maze default constructor sets them for you. 
 
 ### Example
-+---+---+---+
-|       |   |
-+   +---+   +
-|   |   |   |
-+   +   +   +
-|       |   |
-+---+---+---+
+
+
+`+---+---+---+`
+
+`|       |   |`
+
+`+   +---+   +`
+
+`|   |   |   |`
+
+`+   +   +   +`
+
+`|       |   |`
+
+`+---+---+---+`
+
 
 Starting with the top left cell, there is a left wall and top wall present. So in maze.txt my first cell would be written 11.
 The next cell to the right has no left wall (0) but it does have a top wall(1). So it would be written as 01. Following this pattern for each cell, the following sample maze would be translated to:
-11 01 11
-10 11 10
-10 00 10
 
+`11 01 11`
+
+`10 11 10`
+
+`10 00 10`
+
+----------------------------------------
 ### Important Notes
+
 - Your sample maze must be 16 x 16 cells
 - Remember to have maze.txt in the same directory as the other files ;)
 - For each 2 digit combination in maze.txt, the left digit is for the left wall; right digit, top wall
