@@ -1,12 +1,23 @@
-COMPILE=g++
-FLAGS=-Wall -Werror -ansi -pedantic
-OBJS=cell.o maze.o
-all: main.cpp $(OBJS)
-	$(COMPILE) $(FLAGS) -o program.out main.cpp $(OBJS)
+CC=g++
+FLAGS= -g -Wall -Werror
 
-cell.o: cell.cpp cell.h
-	$(COMPILE) $(FLAGS) -c cell.cpp
-maze.o: maze.cpp maze.h
-	$(COMPILE) $(FLAGS) -c maze.cpp
+start: main.o cell.o maze.o mouse.o
+	$(CC) $(FLAGS) main.o cell.o maze.o mouse.o -o start
+
+main.o: main.cpp
+	$(CC) $(FLAGS) -c main.cpp
+
+cell.o: cell.*
+	$(CC) $(FLAGS) -c cell.cpp
+
+maze.o: maze.*
+	$(CC) $(FLAGS) -c maze.cpp
+
+mouse.o: mouse.*
+	$(CC) $(FLAGS) -c mouse.cpp
+
 clean:
-	rm *.o program.out
+	rm *.o start
+
+# https://www.youtube.com/watch?v=_r7i5X0rXJk
+# ffs

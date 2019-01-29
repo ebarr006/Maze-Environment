@@ -1,118 +1,33 @@
-#include <iostream>
 #include "cell.h"
 
-using namespace std;
-//       0
-//    +----+
-//  3 | 10 | 1
-//    +----+
-//       2
-
 Cell::Cell() {
-  top = false;
-  right = false;
-  bot = false;
-  left = false;
-  found = false;
-  // face = 0;
+	t = d = l = r = false;
+	sym = '^';
+	dist = 99;
 }
 
-bool Cell::isTop() {
-  return top;
+Cell::Cell(bool tp, bool dwn, bool lft, bool rht) : t(tp), d(dwn), l(lft), r(rht) {}
+
+bool Cell::top() {
+	return t;
 }
 
-bool Cell::isRight() {
-  return right;
+bool Cell::down() {
+	return d;
 }
 
-bool Cell::isBot() {
-  return bot;
+bool Cell::left() {
+	return l;
 }
 
-bool Cell::isLeft() {
-  return left;
+bool Cell::right() {
+	return r;
 }
 
-void Cell::setTop(int z) {
-  if (z == 1) {
-    top = true;
-  }
-  else
-    top = false;
+int Cell::getDist() {
+	return dist;
 }
 
-void Cell::setRight(int z) {
-  if (z == 1) {
-    right = true;
-  }
-  else
-    right = false;
-}
-void Cell::setBot(int z) {
-  if (z == 1) {
-    bot = true;
-  }
-  else
-    bot = false;
-}
-
-void Cell::setLeft(int z) {
-  if (z == 1) {
-    left = true;
-  }
-  else
-    left = false;
-}
-
-void Cell::printTop() {
-  cout << "+";
-  if (top) {
-    cout << "---";
-  }
-  else {
-    cout << "   ";
-  }
-}
-
-void Cell::printBot() {
-  cout << "+";
-  if (bot) {
-    cout << "---";
-  }
-  else {
-    cout << "   ";
-  }
-}
-
-void Cell::printLeft() {
-  if (left) {
-    cout << "|   ";
-  }
-  else {
-    cout << "    ";
-  }
-}   // 4 spaces total
-
-void Cell::printWithChar() {
-  if (left) {
-    cout << "|";
-  }
-  else {                          // with/without a wall. if there print it, if not its a space
-    cout << " ";
-  }     // 4 spaces total
-}
-
-void Cell::printRight() {
-  //cout << "here\n";
-  if (right) {
-    cout << "|";
-  }
-}
-
-void Cell::setDiscovered() {
-  found = true;
-}
-
-bool Cell::isDiscovered() {
-  return found;
+void Cell::setFacing(char x) {
+	sym = x;
 }
