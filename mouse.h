@@ -16,6 +16,7 @@ class Mouse {
 		void rotate(int dir);
 		void move(int dir);
 		void logic();
+		void debug();
 		bool isCenter();
 };
 

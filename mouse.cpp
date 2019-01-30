@@ -14,6 +14,7 @@ Mouse::Mouse() {
 void Mouse::scan(const Maze &m) {
 	switch (direction) {
 		case 0:
+		std::cout << "Case 0:\n";
 		mem.maze[iPos][jPos].l = m.maze[iPos][jPos].l;
 		if (jPos != 0) {
 			mem.maze[iPos][jPos-1].r = m.maze[iPos][jPos].l;
@@ -29,13 +30,10 @@ void Mouse::scan(const Maze &m) {
 			mem.maze[iPos][jPos+1].l = m.maze[iPos][jPos].r;
 		}
 		
-		// if (mem.maze[iPos][jPos].l) { std::cout << "LEFT  wall set\n"; }
-		// if (mem.maze[iPos][jPos].t) { std::cout << "TOP   wall set\n"; }
-		// if (mem.maze[iPos][jPos].r) { std::cout << "RIGHT wall set\n"; }
-		
 		break;
 		
 		case 1:
+		std::cout << "Case 1:\n";
 		mem.maze[iPos][jPos].t = m.maze[iPos][jPos].t;
 		if (iPos != 0) {
 			mem.maze[iPos-1][jPos].d = m.maze[iPos][jPos].t;
@@ -45,7 +43,6 @@ void Mouse::scan(const Maze &m) {
 		if (jPos != 15) {
 			mem.maze[iPos][jPos+1].l = m.maze[iPos][jPos].r;
 		}
-		
 		mem.maze[iPos][jPos].d = m.maze[iPos][jPos].d;
 		if (iPos != 15) {
 			mem.maze[iPos+1][jPos].t = m.maze[iPos][jPos].d;
@@ -53,6 +50,7 @@ void Mouse::scan(const Maze &m) {
 		break;
 
 		case 2:
+		std::cout << "Case 2:\n";
 		mem.maze[iPos][jPos].r = m.maze[iPos][jPos].r;
 		if (jPos != 15) {
 			mem.maze[iPos][jPos+1].l = m.maze[iPos][jPos].r;
@@ -70,6 +68,7 @@ void Mouse::scan(const Maze &m) {
 		break;
 
 		case 3:
+		std::cout << "Case 3:\n";
 		mem.maze[iPos][jPos].d = m.maze[iPos][jPos].d;
 		if (iPos != 15) {
 			mem.maze[iPos+1][jPos].t = m.maze[iPos][jPos].d;
@@ -101,20 +100,7 @@ void Mouse::move(int dir) {
 }
 
 void Mouse::logic() {
-	bool avail[4] = { !mem.maze[iPos][jPos].t, !mem.maze[iPos][jPos].r, !mem.maze[iPos][jPos].d, !mem.maze[iPos][jPos].l};
-	if (avail[0]) {
-		std::cout << "top open\n";
-	}
-	if (avail[1]) {
-		std::cout << "right open\n";
-	}
-	if (avail[2]) {
-		std::cout << "down open\n";
-	}
-	if (avail[3]) {
-		std::cout << "left open\n";
-	}
-	
+	bool avail[4] = { !mem.maze[iPos][jPos].t, !mem.maze[iPos][jPos].r, !mem.maze[iPos][jPos].d, !mem.maze[iPos][jPos].l};	
 	if (avail[3]) {
 		rotate(0);
 		move(0);
@@ -128,6 +114,16 @@ void Mouse::logic() {
 		rotate(3);
 		move(3);
 	}
+	
+	std::cout << "\n----------------------\n";
+}
+
+void Mouse::debug() {
+	std::cout << "( " << iPos << " , " << jPos << " ):\n";
+	if (mem.maze[iPos][jPos].t) { std::cout << "TOP  : wall\n"; } else { std::cout << "TOP  : open \n";}
+	if (mem.maze[iPos][jPos].r) { std::cout << "RIGHT: wall\n"; } else { std::cout << "RIGHT: open \n";}
+	if (mem.maze[iPos][jPos].d) { std::cout << "DOWN : wall\n"; } else { std::cout << "DOWN : open \n";}
+	if (mem.maze[iPos][jPos].l) { std::cout << "LEFT : wall\n"; } else { std::cout << "LEFT : open \n";}
 }
 
 bool Mouse::isCenter() {

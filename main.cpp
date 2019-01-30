@@ -29,6 +29,7 @@ int main() {
 	
 	while (!mini.isCenter()) {
 		mini.scan(m);
+		mini.debug();
 		mini.logic();
 		delay(0.75);
 	}

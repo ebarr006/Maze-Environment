@@ -3,22 +3,12 @@
 using namespace std;
 
 Maze::Maze() {
-    for (unsigned i = 0; i < SIZE; ++i) {
-      for (unsigned j = 0; j < SIZE; ++j) {
-        if (i == 0) {
-          maze[0][j].t = true;       // top border
-        }
-        if (j == 15) {
-          maze[i][15].r = true;      // right border
-        }
-        if (i == 15) {
-          maze[15][j].d = true;        // bottom border
-        }
-        if (j == 0) {
-          maze[i][0].l = true;      // left border
-        }
-      }
-    }
+	for (int i = 0; i < SIZE; ++i) {
+		maze[0][i].t = true;
+		maze[i][15].r = true;
+		maze[15][i].d = true;
+		maze[i][0].l = true;
+	}
 	print(15, 0, 0);
 }
 
@@ -27,6 +17,13 @@ Maze::Maze(string filename) {
 	ifstream file;
 	file.open(filename.c_str());
 	int i = 0; int j = 0; int status = 0;
+	
+	for (int i = 0; i < SIZE; ++i) {
+		maze[0][i].t = true;
+		maze[i][15].r = true;
+		maze[15][i].d = true;
+		maze[i][0].l = true;
+	}
 	
 	while ((i != SIZE) && (j != SIZE)) {
 		file >> status;
