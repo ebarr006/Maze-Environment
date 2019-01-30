@@ -2,7 +2,28 @@
 
 using namespace std;
 
+Maze::Maze() {
+    for (unsigned i = 0; i < SIZE; ++i) {
+      for (unsigned j = 0; j < SIZE; ++j) {
+        if (i == 0) {
+          maze[0][j].t = true;       // top border
+        }
+        if (j == 15) {
+          maze[i][15].r = true;      // right border
+        }
+        if (i == 15) {
+          maze[15][j].d = true;        // bottom border
+        }
+        if (j == 0) {
+          maze[i][0].l = true;      // left border
+        }
+      }
+    }
+	print(15, 0, 0);
+}
+
 Maze::Maze(string filename) {
+	cout << "\nImported Maze:\n";
 	ifstream file;
 	file.open(filename.c_str());
 	int i = 0; int j = 0; int status = 0;
@@ -14,27 +35,27 @@ Maze::Maze(string filename) {
 			break;
 			
 			case 1: //01 - left off, top on
-			hidden[i][j].t = true;
+			maze[i][j].t = true;
 			if (i != 0) {
-				hidden[i-1][j].d = true;
+				maze[i-1][j].d = true;
 			}
 			break;
 						
 			case 10: // 10 - left on, top off
-			hidden[i][j].l = true;
+			maze[i][j].l = true;
 			if (j != 0) {
-				hidden[i][j-1].r = true;
+				maze[i][j-1].r = true;
 			}
 			break;
 			
 			case 11: // 11 - left on, top on
-			hidden[i][j].l = true;
-			hidden[i][j].t = true;
+			maze[i][j].l = true;
+			maze[i][j].t = true;
 			if (j != 0 ) {
-				hidden[i][j-1].r = true;
+				maze[i][j-1].r = true;
 			}
 			if (i != 0) {
-				hidden[i-1][j].d = true;
+				maze[i-1][j].d = true;
 			}
 		}
 		++j;
@@ -43,25 +64,30 @@ Maze::Maze(string filename) {
 			++i;
 		}
 	}
-	printLearned();
+	print(15, 0, 0);
 }
 
-void Maze::printHidden() {
+void Maze::print(int iCord, int jCord, int dir) {
 	for (int i = 0; i < SIZE; i++) {
 		for (int k = 0; k < 2; k++) {
 			for (int j = 0; j < SIZE; j++) {
 				if (k == 0) {
 					cout << "+";
-					((hidden[i][j].top() && hidden[i-1][j].down() && IN_VERT_BOUND) || i == 0) ? cout << "---" : cout << "   ";
+					((maze[i][j].top() && maze[i-1][j].down() && IN_VERT_BOUND) || i == 0) ? cout << "---" : cout << "   ";
 				}
 				else if (k == 1) {
-					if ((learned[i][j].left() && learned[i][j-1].right() && IN_HORZ_BOUND) || j == 0) {
+					if ((maze[i][j].left() && maze[i][j-1].right() && IN_HORZ_BOUND) || j == 0) {
 						cout << "|";
 					} else {
 						cout << " ";
 					}
-					if (i == mini.i && j == mini.j) {
-						cout << " " << mini.direction << " ";
+					if (i == iCord && j == jCord) {
+						cout << " ";
+						if (dir == 0) { cout << '^'; }
+						if (dir == 1) { cout << '>'; }
+						if (dir == 2) { cout << 'v'; }
+						if (dir == 3) { cout << '<'; }
+						cout << " ";
 					} else {
 						cout << "   ";
 					}
@@ -77,38 +103,16 @@ void Maze::printHidden() {
 	cout << endl;
 }
 
-void Maze::printLearned() {
-	for (int i = 0; i < SIZE; i++) {
-		for (int k = 0; k < 2; k++) {
-			for (int j = 0; j < SIZE; j++) {
-				if (k == 0) {
-					cout << "+";
-					((learned[i][j].top() && learned[i-1][j].down() && IN_VERT_BOUND) || i == 0) ? cout << "---" : cout << "   ";
-				}
-				else if (k == 1) {
-					if ((learned[i][j].left() && learned[i][j-1].right() && IN_HORZ_BOUND) || j == 0) {
-						cout << "|";
-					} else {
-						cout << " ";
-					}
-					if (i == mini.i && j == mini.j) {
-						cout << " " << mini.direction << " ";
-					} else {
-						cout << "   ";
-					}
-				}
-			}
-			(k == 0) ? cout << "+" << endl : cout << "|" << endl;
-		}
-	}
-	cout << "+";
-	for (int i = 0; i < SIZE; ++i) {
-		cout << "---+";
-	}
-	cout << endl;
-}
 
-void Maze::scan() {
-	
-}
+
+
+
+
+
+
+
+
+
+
+
 

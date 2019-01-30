@@ -2,7 +2,6 @@
 
 Cell::Cell() {
 	t = d = l = r = false;
-	sym = '^';
 	dist = 99;
 }
 
@@ -26,8 +25,4 @@ bool Cell::right() {
 
 int Cell::getDist() {
 	return dist;
-}
-
-void Cell::setFacing(char x) {
-	sym = x;
 }

@@ -1,21 +1,22 @@
 #ifndef MOUSE_H
 #define MOUSE_H
 
-#define UP '^'
-#define DOWN 'v'
-#define LEFT '<'
-#define RIGHT '>'
+#include "maze.h"
 
 class Mouse {
-
+	private:
+		Maze mem;
+		int iPos;
+		int jPos;
+		int direction;
+	
 	public:
-		char direction;
-		int i;
-		int j;
-		
 		Mouse();
+		void scan(const Maze &m);
 		void rotate(int dir);
 		void move(int dir);
+		void logic();
+		bool isCenter();
 };
 
 #endif

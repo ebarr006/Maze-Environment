@@ -3,7 +3,6 @@
 
 class Cell {
 	private:
-		char sym;
 		int dist;
 
 	public:
@@ -16,7 +15,6 @@ class Cell {
 		bool left();
 		bool right();
 		int getDist();
-		void setFacing(char);
 };
 
 #endif

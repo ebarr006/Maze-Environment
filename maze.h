@@ -2,7 +2,6 @@
 #define MAZE_H
 
 #include "cell.h"
-#include "mouse.h"
 #include <string>
 #include <iostream>
 #include <fstream>
@@ -13,16 +12,11 @@
 
 
 class Maze {
-	private:
-		Mouse mini;
-		Cell hidden[SIZE][SIZE];
-		Cell learned[SIZE][SIZE];
-
 	public:
+		Cell maze[SIZE][SIZE];
+		Maze();
 		Maze(std::string filename);
-		void printHidden();
-		void printLearned();
-		void scan();
+		void print(int i, int j, int dir);
 		
 };
 
