@@ -5,27 +5,32 @@ Stack::Stack() {
 	top = -1;
 }
 
-void Stack::push(Cell c) {
-	if (top == MAX - 1) {
-		std::cout << "ERR: STACK FUL" << std::endl;
-		return;
+bool Stack::push(Cell c) {
+	std::cout << "top before PUSH: " << top << std::endl;
+	if (top >= MAX - 1) {
+		std::cout << "ERROR: STACK FULL" << std::endl;
+		return false;
+	} else {
+		++top;
+		stack[top] = c;
+		std::cout << "top after PUSH: " << top << std::endl;
+		return true;
 	}
-	++top;
-	opts[top] = c;
 }
 
 Cell Stack::pop() {
-	if (top == -1) {
-		std::cout << "ERR: STACK EMPTY" << std::endl;
-		Cell x;
-		x.ignore = true;
-		// weird error trying to return NULL but return type is not pointer (just Cell)
-		// temporary workaround FIX ME
-		return x;
+	std::cout << "top before POP: " << top << std::endl;
+	if (top < 0) {
+		std::cout << "ERROR: STACK EMPTY" << std::endl;
+		exit(0);
+	} else {
+		Cell temp = stack[top];
+		--top;
+		std::cout << "top after POP: " << top << std::endl;
+		return temp;
 	}
+}
 
-	Cell item = opts[top];
-	--top;
-
-	return item;
+bool Stack::isEmpty() {
+	return (top < 0);
 }

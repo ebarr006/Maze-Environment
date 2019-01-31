@@ -3,11 +3,11 @@
 
 class Cell {
 	public:
-		int weight;
 		bool t, d, l, r;
 		bool found;
+		int weight;
 		Cell();
-		Cell(bool, bool, bool, bool);
+		Cell(bool, bool, bool, bool, int);
 };
 
 #endif

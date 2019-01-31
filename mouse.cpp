@@ -171,6 +171,77 @@ void Mouse::leftWallFollow() {
 	std::cout << "\n----------------------\n";
 }
 
+
+void Mouse::rightWallFollow() {
+	switch (direction) {
+		case 0:
+		if (!mem.maze[iPos][jPos].r) {
+			rotate(1);
+			step();
+		} else if (!mem.maze[iPos][jPos].t) {
+			rotate(0);
+			step();
+		} else if (!mem.maze[iPos][jPos].l) {
+			rotate(3);
+			step();
+		} else { // u-turn
+			rotate(2);
+			step();
+		}
+		break;
+		
+		case 1:
+		if (!mem.maze[iPos][jPos].d) {
+			rotate(2);
+			step();
+		} else if (!mem.maze[iPos][jPos].r) {
+			rotate(1);
+			step();
+		} else if (!mem.maze[iPos][jPos].t) {
+			rotate(0);
+			step();
+		} else { // u-turn
+			rotate(3);
+			step();
+		}
+		break;
+		
+		case 2:
+		if (!mem.maze[iPos][jPos].l) {
+			rotate(3);
+			step();
+		} else if (!mem.maze[iPos][jPos].d) {
+			rotate(2);
+			step();
+		} else if (!mem.maze[iPos][jPos].r) {
+			rotate(1);
+			step();
+		} else { // u-turn
+			rotate(0);
+			step();
+		}
+		break;
+		
+		case 3:
+		if (!mem.maze[iPos][jPos].t) {
+			rotate(0);
+			step();
+		} else if (!mem.maze[iPos][jPos].l) {
+			rotate(3);
+			step();
+		} else if (!mem.maze[iPos][jPos].d) {
+			rotate(2);
+			step();
+		} else { // u-turn
+			rotate(1);
+			step();
+		}
+		break;
+	}
+	
+	std::cout << "\n----------------------\n";
+}
+
 void Mouse::debug() {
 	std::cout << "( " << iPos << " , " << jPos << " ):\n";
 	if (mem.maze[iPos][jPos].t) { std::cout << "TOP  : wall\n"; } else { std::cout << "TOP  : open \n";}

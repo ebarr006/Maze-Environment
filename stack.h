@@ -2,17 +2,19 @@
 #define STACK_H
 
 #include "cell.h"
-#define MAX 256
+#define MAX 256 // 16 * 16
 
 class Stack {
 	private:
-		Cell opts[MAX];
 		int top;
 
 	public:
+		Cell stack[MAX];
 		Stack();
-		void push(Cell c);
+		bool isEmpty();
+		bool push(Cell c);
 		Cell pop();
+
 };
 
 #endif
