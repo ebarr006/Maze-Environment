@@ -70,10 +70,10 @@ void Maze::print(int iCord, int jCord, int dir) {
 			for (int j = 0; j < SIZE; j++) {
 				if (k == 0) {
 					cout << "+";
-					((maze[i][j].top() && maze[i-1][j].down() && IN_VERT_BOUND) || i == 0) ? cout << "---" : cout << "   ";
+					((maze[i][j].t && maze[i-1][j].d && IN_VERT_BOUND) || i == 0) ? cout << "---" : cout << "   ";
 				}
 				else if (k == 1) {
-					if ((maze[i][j].left() && maze[i][j-1].right() && IN_HORZ_BOUND) || j == 0) {
+					if ((maze[i][j].l && maze[i][j-1].r && IN_HORZ_BOUND) || j == 0) {
 						cout << "|";
 					} else {
 						cout << " ";

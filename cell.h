@@ -2,19 +2,12 @@
 #define CELL_H
 
 class Cell {
-	private:
-		int dist;
-
 	public:
+		int weight;
 		bool t, d, l, r;
-		
+		bool found;
 		Cell();
 		Cell(bool, bool, bool, bool);
-		bool top();
-		bool down();
-		bool left();
-		bool right();
-		int getDist();
 };
 
 #endif

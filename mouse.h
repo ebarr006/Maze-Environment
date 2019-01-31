@@ -9,13 +9,14 @@ class Mouse {
 		int iPos;
 		int jPos;
 		int direction;
+		int dist;
 	
 	public:
 		Mouse();
 		void scan(const Maze &m);
 		void rotate(int dir);
-		void move(int dir);
-		void logic();
+		void step();
+		void leftWallFollow();
 		void debug();
 		bool isCenter();
 };

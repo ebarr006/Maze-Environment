@@ -2,10 +2,6 @@
 
 using namespace std;
 
-
-// #define VERT_WALL_CONDITION (arr[i][j].top() && arr[i-1][j].down() && IN_VERT_BOUND)
-// #define HORZ_WALL_CONDITION (arr[i][j].left() && arr[i][j-1].right() && IN_HORZ_BOUND)
-
 void delay(double secondsToDelay)
 {
   double startTime = double(clock()); //Start timer
@@ -21,6 +17,7 @@ void delay(double secondsToDelay)
     }
 }
 
+// https://www.learncpp.com/cpp-tutorial/78-function-pointers/
 
 int main() {
 	
@@ -30,8 +27,8 @@ int main() {
 	while (!mini.isCenter()) {
 		mini.scan(m);
 		mini.debug();
-		mini.logic();
-		delay(0.75);
+		mini.leftWallFollow();
+		//delay(0.15);
 	}
 	
 	return 0;
