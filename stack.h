@@ -2,7 +2,7 @@
 #define STACK_H
 
 #include "cell.h"
-#define MAX 256 // 16 * 16
+#define MAX 1000 // 16 * 16
 
 class Stack {
 	private:

@@ -86,6 +86,7 @@ void Mouse::scan(const Maze &m) {
 		}
 		break;
 	}
+	stk.push(mem.maze[iPos][jPos]);
 	mem.print(iPos, jPos, direction);
 }
 
@@ -171,7 +172,6 @@ void Mouse::leftWallFollow() {
 	std::cout << "\n----------------------\n";
 }
 
-
 void Mouse::rightWallFollow() {
 	switch (direction) {
 		case 0:
@@ -240,6 +240,12 @@ void Mouse::rightWallFollow() {
 	}
 	
 	std::cout << "\n----------------------\n";
+}
+
+void Mouse::leftRightMix() {
+	int mixer = rand() % 2;
+	if (mixer) { leftWallFollow(); }
+	else { rightWallFollow(); }
 }
 
 void Mouse::debug() {

@@ -2,10 +2,13 @@
 #define MOUSE_H
 
 #include "maze.h"
+#include "stack.h"
+#include <cstdlib>
 
 class Mouse {
 	private:
 		Maze mem;
+		Stack stk;
 		int iPos;
 		int jPos;
 		int direction;
@@ -19,6 +22,7 @@ class Mouse {
 		void (Mouse::*strat)();
 		void leftWallFollow();
 		void rightWallFollow();
+		void leftRightMix();
 		void debug();
 		bool isCenter();
 };

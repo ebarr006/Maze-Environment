@@ -1,13 +1,17 @@
 #ifndef CELL_H
 #define CELL_H
 
-class Cell {
-	public:
-		bool t, d, l, r;
-		bool found;
-		int weight;
-		Cell();
-		Cell(bool, bool, bool, bool, int);
+struct Cell {
+	bool t;
+	bool d;
+	bool l;
+	bool r;
+	bool found;
+	int weight;
+	Cell() {
+		t = d = l = r = found = false;
+		weight = 2;
+	};
 };
 
 #endif

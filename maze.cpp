@@ -65,6 +65,14 @@ Maze::Maze(string filename) {
 }
 
 void Maze::print(int iCord, int jCord, int dir) {
+	// int i = maze[iCord][jCord].weight;
+	// int digits = 0;
+	// // count digits to determine printing width of cell
+	// while (i != 0) {
+	// 	digits++;
+	// 	i /= 10;
+	// }
+
 	for (int i = 0; i < SIZE; i++) {
 		for (int k = 0; k < 2; k++) {
 			for (int j = 0; j < SIZE; j++) {
@@ -99,17 +107,3 @@ void Maze::print(int iCord, int jCord, int dir) {
 	}
 	cout << endl;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-

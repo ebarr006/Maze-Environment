@@ -6,14 +6,14 @@ Stack::Stack() {
 }
 
 bool Stack::push(Cell c) {
-	std::cout << "top before PUSH: " << top << std::endl;
+	// std::cout << "top before PUSH: " << top << std::endl;
 	if (top >= MAX - 1) {
 		std::cout << "ERROR: STACK FULL" << std::endl;
 		return false;
 	} else {
 		++top;
 		stack[top] = c;
-		std::cout << "top after PUSH: " << top << std::endl;
+		// std::cout << "top after PUSH: " << top << std::endl;
 		return true;
 	}
 }
