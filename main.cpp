@@ -2,38 +2,50 @@
 
 using namespace std;
 
-void delay(double secondsToDelay)
-{
-  double startTime = double(clock()); //Start timer
-  double secondsPassed;
-  bool flag = true;
-  while(flag)
-  {
-    secondsPassed = (double(clock() - startTime)) / double(CLOCKS_PER_SEC);;
-    if(secondsPassed >= secondsToDelay)
-      {
-        flag = false;
-      }
-    }
-}
-
-int main() {
+int main(int argc, char** argv) {
+	double t = 0.10;
+	
+	if (argc != 1) {
+		for (int i = 0; argv[i] != '\0'; i++) {
+			if (strcmp(argv[i], "-h") == 0) {
+				cout << "\t-t\t\tPass time amount between steps i.e., 0.50 for half a second,\n";
+				cout << "\t\t\t2 for 2 seconds.\n";
+				cout << "\t\t\t(Default time value is 0.10 seconds)\n";
+				cout << "\t-x\t\tSome new parameter I'll add later.\n";
+				cout << "\t-h\t\tDisplay all argument parameters.\n";
+				
+				return 0;
+			}
+			if (strcmp(argv[i], "-t") == 0) {
+				t = atof(argv[i+1]);
+			}
+		}
+	}
+	
+	
 	Maze m("maze3.txt");
-	Mouse mini;	
+	Mouse mini;
 	
-	cout << "\n\nSelect a Strategy:\n[1]  Left Wall Follow\n[2]  Right Wall Follow\n[3]  Random Search\n[4]  Flood Fill\n> ";
-	char s = cin.get();
+	char s;
+	bool flag = false;
 	
-	if (s == '1') { mini.strat = &Mouse::leftWallFollow; }
-	if (s == '2') { mini.strat = &Mouse::rightWallFollow; }
-	if (s == '3') { mini.strat = &Mouse::leftRightMix; }
-	if (s == '4') { mini.strat = &Mouse::floodFill; }
+	while (!flag){
+		cout << "------------------\n" << "Select a Strategy:\n" << "------------------\n";
+		cout << "[1]  Left Wall Follow\n[2]  Right Wall Follow\n[3]  Random Search\n[4]  Flood Fill\n> ";
+		s = cin.get();
+		if (s == '1') { mini.strat = &Mouse::leftWallFollow; flag = true;}
+		if (s == '2') { mini.strat = &Mouse::rightWallFollow; flag = true;}
+		if (s == '3') { mini.strat = &Mouse::leftRightMix; flag = true;}
+		if (s == '4') { mini.strat = &Mouse::floodFill; flag = true;}
+		else { cout << "\nINVALID INPUT\n\n"; }
+		s = cin.get();
+	}
 	
 	while (!mini.isCenter()) { // && s != '\n') {
 		mini.scan(m);
 		mini.debug();
 		(mini.*(mini.strat))();
-		delay(.10);
+		mini.delay(t);
 		// cin.ignore();
 	}
 	cout << "\nSolved! <(0 u 0 <)\n" << endl;

@@ -99,6 +99,7 @@ void Mouse::step() {
 	if (direction == 2) { iPos++; }
 	if (direction == 3) { jPos--; }
 	mem.maze[iPos][jPos].found = true;
+	mem.print(iPos, jPos, direction);
 }
 
 void Mouse::leftWallFollow() {
@@ -168,7 +169,7 @@ void Mouse::leftWallFollow() {
 		break;
 	}
 	
-	mem.print(iPos, jPos, direction);
+	// mem.print(iPos, jPos, direction);
 }
 
 void Mouse::rightWallFollow() {
@@ -238,7 +239,7 @@ void Mouse::rightWallFollow() {
 		break;
 	}
 	
-	mem.print(iPos, jPos, direction);
+	// mem.print(iPos, jPos, direction);
 }
 
 void Mouse::leftRightMix() {
@@ -287,8 +288,7 @@ void Mouse::floodFill() {
 	// std::cout << "Curr: ( " << iPos << " , " << jPos << " ) " << direction << std::endl;
 	rotate(dir);
 	step();
-	mem.print(iPos, jPos, direction);
-	// std::cout << "outside" << std::endl;
+	// mem.print(iPos, jPos, direction);
 }
 
 int Mouse::getMinNeighbor(int i, int j, int &d) {
@@ -324,18 +324,6 @@ int Mouse::getMinNeighbor(int i, int j, int &d) {
 	return minVal;
 }
 
-int Mouse::getI() {
-	return iPos;
-}
-
-int Mouse::getJ() {
-	return jPos;
-}
-
-int Mouse::getD() {
-	return direction;
-}
-
 void Mouse::debug() {
 	std::cout << "( " << iPos << " , " << jPos << " ):\n";
 	if (mem.maze[iPos][jPos].t) { std::cout << "TOP  : wall\n"; } else { std::cout << "TOP  : open \n";}
@@ -345,12 +333,50 @@ void Mouse::debug() {
 }
 
 bool Mouse::isCenter() {
-	return (mem.maze[iPos][jPos].dist == 0);
-	// return ((iPos == 7 && jPos == 7) || (iPos == 7 && jPos == 8) || (iPos == 8 && jPos == 7) || (iPos == 8 && jPos == 8));
+	if (mem.maze[iPos][jPos].dist == 0) {
+		mem.print(iPos, jPos, direction);
+		
+		if (iPos == 7 && jPos == 7) {
+			rotate(1); step(); delay(0.30);
+			rotate(2); step(); delay(0.30);
+			rotate(3); step(); delay(0.30);
+			rotate(0); step(); delay(0.30);
+		} else if (iPos == 7 && jPos == 8) {
+			rotate(2); step(); delay(0.30);
+			rotate(3); step(); delay(0.30);
+			rotate(0); step(); delay(0.30);
+			rotate(1); step(); delay(0.30);
+		} else if (iPos == 8 && jPos == 7) {
+			rotate(0); step(); delay(0.30);
+			rotate(1); step(); delay(0.30);
+			rotate(2); step(); delay(0.30);
+			rotate(3); step(); delay(0.30);
+		} else {
+			rotate(3); step(); delay(0.30);
+			rotate(0); step(); delay(0.30);
+			rotate(1); step(); delay(0.30);
+			rotate(2); step(); delay(0.30);
+		}
+		
+		return true;
+	}
+	return false;
 }
 
 bool Mouse::isStart() {
 	return (iPos == 15 && jPos == 0);
+}
+
+void Mouse::delay(double s) {
+	double start = double(clock()); //Start timer
+	double elapsed;
+	bool f = true;
+	while(f) {
+		elapsed = (double(clock() - start)) / double(CLOCKS_PER_SEC);;
+		if (elapsed >= s) {
+			f = false;
+		}
+	}
 }
 
 

@@ -12,6 +12,9 @@ make
 ./start
 </pre>
 
+## Run Settings
+You can change some of the program's settings using command line arguments. Just add the flag and argument after <pre>start</pre>. To change the delay interval between mouse steps, use <pre>-t</pre> and the time interval (1 = 1 second, 0.5 = half a second). To see all command line argument settings, type <pre>-h</pre>.
+
 
 ### Importing Sample Mazes
 maze.txt depicts a sample maze by representing each cell with a binary combination. Find a sample maze you would like to import. Starting with the top left cell, translate the sample maze into maze.txt by writing a 1, wall is present, or 0, wall is not present, for the left wall and then the top wall. Each cell should be represented by 2 digits in the text file.

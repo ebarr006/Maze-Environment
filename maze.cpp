@@ -48,10 +48,10 @@ Maze::Maze() {
 			maze[i+(SIZE/2)][j+(SIZE/2)].dist = j+i;
 		}
 	}
-	maze[SIZE/2 - 1][SIZE/2 - 1].dist = 0;
-	maze[SIZE/2 - 1][SIZE/2].dist = 0;
-	maze[SIZE/2][SIZE/2 - 1].dist = 0;
-	maze[SIZE/2][SIZE/2].dist = 0;
+	// maze[SIZE/2 - 1][SIZE/2 - 1].dist = 0;
+	// maze[SIZE/2 - 1][SIZE/2].dist = 0;
+	// maze[SIZE/2][SIZE/2 - 1].dist = 0;
+	// maze[SIZE/2][SIZE/2].dist = 0;
 	print(15, 0, 0);
 }
 

@@ -26,12 +26,10 @@ class Mouse {
 		void leftRightMix();
 		void floodFill();
 		int getMinNeighbor(int, int, int&);
-		int getI();
-		int getJ();
-		int getD();
 		void debug();
 		bool isCenter();
 		bool isStart();
+		void delay(double);
 };
 
 // https://stackoverflow.com/questions/2402579/function-pointer-to-member-function
