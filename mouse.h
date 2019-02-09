@@ -25,7 +25,7 @@ class Mouse {
 		void rightWallFollow();
 		void leftRightMix();
 		void floodFill();
-		int getMinNeighbor(int, int);
+		int getMinNeighbor(int, int, int&);
 		int getI();
 		int getJ();
 		int getD();

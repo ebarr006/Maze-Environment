@@ -5,10 +5,12 @@ struct Node {
 	int i;
 	int j;
 	int dis;
+	bool branch;
 	Node() {
 		i = 999;
 		j = 999;
 		dis = 999;
+		branch = false;
 	}
 	Node(int ii, int jj, int d) {
 		i = ii;

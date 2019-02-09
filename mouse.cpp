@@ -168,7 +168,7 @@ void Mouse::leftWallFollow() {
 		break;
 	}
 	
-	std::cout << "\n----------------------\n";
+	mem.print(iPos, jPos, direction);
 }
 
 void Mouse::rightWallFollow() {
@@ -238,7 +238,7 @@ void Mouse::rightWallFollow() {
 		break;
 	}
 	
-	std::cout << "\n----------------------\n";
+	mem.print(iPos, jPos, direction);
 }
 
 void Mouse::leftRightMix() {
@@ -250,6 +250,7 @@ void Mouse::leftRightMix() {
 void Mouse::floodFill() {
 	// collect minimum distance of open neighbors
 	int minVal = 0;
+	int dir = 0;
 	
 	if (stk.empty()) {
 		stk.push(Node(iPos, jPos, mem.maze[iPos][jPos].dist));
@@ -259,67 +260,38 @@ void Mouse::floodFill() {
 		Node temp = stk.top();
 		stk.pop();
 		// std::cout << "Temp: ( " << temp.i << " , " << temp.j << " )  | Dist: " << temp.dis << std::endl;
-		minVal = getMinNeighbor(temp.i, temp.j);
+		minVal = getMinNeighbor(temp.i, temp.j, dir);
 		if (temp.dis != (1 + minVal)) {
 			mem.maze[temp.i][temp.j].dist = 1 + minVal;
 			if (!mem.maze[temp.i][temp.j].t) {
-				Node t( (temp.i-1), temp.j, mem.maze[temp.i-1][temp.j].dist );
 				//std::cout << "Pushing TOP..." << std::endl;
-				stk.push( t );
+				stk.push(Node((temp.i-1), temp.j, mem.maze[temp.i-1][temp.j].dist));
 			}
 			if (!mem.maze[temp.i][temp.j].r) {
-				Node t( temp.i, (temp.j+1), mem.maze[temp.i][temp.j+1].dist );
 				//std::cout << "Pushing RIGHT..." << std::endl;
-				stk.push( t );
+				stk.push(Node(temp.i, (temp.j+1), mem.maze[temp.i][temp.j+1].dist));
 			}
 			if (!mem.maze[temp.i][temp.j].d) {
-				Node t( (temp.i+1), temp.j, mem.maze[temp.i+1][temp.j].dist );
 				//std::cout << "Pushing DOWN..." << std::endl;
-				stk.push( t );
+				stk.push(Node((temp.i+1), temp.j, mem.maze[temp.i+1][temp.j].dist));
 			}
 			if (!mem.maze[temp.i][temp.j].l) {
-				Node t( temp.i, (temp.j-1), mem.maze[temp.i][temp.j-1].dist );
 				//std::cout << "Pushing LEFT..." << std::endl;
-				stk.push( t );
+				stk.push(Node(temp.i, (temp.j-1), mem.maze[temp.i][temp.j-1].dist));
 			}
 		}
 	}
 	// std::cout << "--------after flood--------" << std::endl;
 	
-	
-	minVal = getMinNeighbor(iPos, jPos);
+	minVal = getMinNeighbor(iPos, jPos, dir);
 	// std::cout << "Curr: ( " << iPos << " , " << jPos << " ) " << direction << std::endl;
-	if (!mem.maze[iPos][jPos].t && (mem.maze[iPos-1][jPos].dist == mem.maze[iPos][jPos].dist-1) && !mem.maze[iPos-1][jPos].found) {
-		rotate(0);
-	}
-	else if (!mem.maze[iPos][jPos].r && (mem.maze[iPos][jPos+1].dist == mem.maze[iPos][jPos].dist-1) && !mem.maze[iPos][jPos+1].found) {
-		rotate(1);
-	}
-	else if (!mem.maze[iPos][jPos].d && (mem.maze[iPos+1][jPos].dist == mem.maze[iPos][jPos].dist-1) && !mem.maze[iPos+1][jPos].found) {
-		rotate(2);
-	}
-	else if (!mem.maze[iPos][jPos].l && (mem.maze[iPos][jPos-1].dist == mem.maze[iPos][jPos].dist-1) && !mem.maze[iPos][jPos-1].found) {
-		rotate(3);
-	}
-	// ----
-	else if (!mem.maze[iPos][jPos].t && (mem.maze[iPos-1][jPos].dist == mem.maze[iPos][jPos].dist-1)) {
-		rotate(0);
-	}
-	else if (!mem.maze[iPos][jPos].r && (mem.maze[iPos][jPos+1].dist == mem.maze[iPos][jPos].dist-1)) {
-		rotate(1);
-	}
-	else if (!mem.maze[iPos][jPos].d && (mem.maze[iPos+1][jPos].dist == mem.maze[iPos][jPos].dist-1)) {
-		rotate(2);
-	}
-	else if (!mem.maze[iPos][jPos].l && (mem.maze[iPos][jPos-1].dist == mem.maze[iPos][jPos].dist-1)) {
-		rotate(3);
-	}
+	rotate(dir);
 	step();
 	mem.print(iPos, jPos, direction);
 	// std::cout << "outside" << std::endl;
 }
 
-int Mouse::getMinNeighbor(int i, int j) {
+int Mouse::getMinNeighbor(int i, int j, int &d) {
 	int top = 999, down = 999, left = 999, right = 999;
 	if (!mem.maze[i][j].t) { top = mem.maze[i-1][j].dist; }
 	if (!mem.maze[i][j].r) { right = mem.maze[i][j+1].dist; }
@@ -333,7 +305,7 @@ int Mouse::getMinNeighbor(int i, int j) {
 	if (top <= down) {
 		a = top;
 	} else {
-		a = down;
+		a = down;	
 	}
 	if (left <= right) {
 		b = left;
@@ -344,7 +316,11 @@ int Mouse::getMinNeighbor(int i, int j) {
 		minVal = a;
 	} else {
 		minVal = b;
-	}	
+	}
+	if (top == minVal) { d = 0; }
+	if (right == minVal) { d = 1; }
+	if (down == minVal) { d = 2; }
+	if (left == minVal) { d = 3; }
 	return minVal;
 }
 
@@ -369,12 +345,12 @@ void Mouse::debug() {
 }
 
 bool Mouse::isCenter() {
-	return ((iPos == 7 && jPos == 7) || (iPos == 7 && jPos == 8) || (iPos == 8 && jPos == 7) || (iPos == 8 && jPos == 8));
+	return (mem.maze[iPos][jPos].dist == 0);
+	// return ((iPos == 7 && jPos == 7) || (iPos == 7 && jPos == 8) || (iPos == 8 && jPos == 7) || (iPos == 8 && jPos == 8));
 }
 
 bool Mouse::isStart() {
 	return (iPos == 15 && jPos == 0);
-
 }
 
 
