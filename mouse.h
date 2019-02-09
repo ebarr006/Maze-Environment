@@ -2,17 +2,18 @@
 #define MOUSE_H
 
 #include "maze.h"
-#include "stack.h"
+#include "Node.h"
 #include <cstdlib>
+#include <stack>
 
 class Mouse {
 	private:
 		Maze mem;
-		Stack stk;
+		std::stack <Node> stk;
 		int iPos;
 		int jPos;
 		int direction;
-		int dist;
+		// int dist;
 	
 	public:
 		Mouse();
@@ -23,8 +24,14 @@ class Mouse {
 		void leftWallFollow();
 		void rightWallFollow();
 		void leftRightMix();
+		void floodFill();
+		int getMinNeighbor(int, int);
+		int getI();
+		int getJ();
+		int getD();
 		void debug();
 		bool isCenter();
+		bool isStart();
 };
 
 // https://stackoverflow.com/questions/2402579/function-pointer-to-member-function

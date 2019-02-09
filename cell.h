@@ -7,10 +7,10 @@ struct Cell {
 	bool l;
 	bool r;
 	bool found;
-	int weight;
+	int dist;
 	Cell() {
 		t = d = l = r = found = false;
-		weight = 2;
+		dist = 0;
 	};
 };
 

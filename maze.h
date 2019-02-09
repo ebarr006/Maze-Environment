@@ -13,11 +13,11 @@
 
 class Maze {
 	public:
+		bool printNums;
 		Cell maze[SIZE][SIZE];
 		Maze();
 		Maze(std::string filename);
 		void print(int i, int j, int dir);
-		
 };
 
 #endif
