@@ -243,8 +243,8 @@ void Mouse::rightWallFollow() {
 }
 
 void Mouse::leftRightMix() {
-	int mixer = rand() % 2;
-	if (mixer) { leftWallFollow(); }
+	// int mixer = rand() % 2;
+	if (rand() % 2) { leftWallFollow(); }
 	else { rightWallFollow(); }
 }
 
