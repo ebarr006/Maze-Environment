@@ -24,7 +24,9 @@ class Mouse {
 		void leftWallFollow();
 		void rightWallFollow();
 		void leftRightMix();
+		void flood();
 		void floodFill();
+		void returnHome();
 		int getMinNeighbor(int, int, int&);
 		void debug();
 		bool isCenter();

@@ -13,7 +13,7 @@ make
 </pre>
 
 ## Run Settings
-You can change some of the program's settings using command line arguments. Just add the flag and argument after <pre>start</pre>. To change the delay interval between mouse steps, use <pre>-t</pre> and the time interval (1 = 1 second, 0.5 = half a second). To see all command line argument settings, type <pre>-h</pre>.
+You can change some of the program's settings using command line arguments. Just add the flag and argument after <pre>start</pre>. To change the delay interval between mouse steps, use <pre>-t</pre> and the time interval (1 = 1 second, 0.5 = half a second). To change the maze file, use <pre>-m</pre> followed by the textfile name holding the maze. For all command line argument settings, type <pre>-h</pre>.
 
 
 ### Importing Sample Mazes

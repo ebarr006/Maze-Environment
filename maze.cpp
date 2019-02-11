@@ -129,7 +129,7 @@ void Maze::print(int iCord, int jCord, int dir) {
 						if (dir == 2) { cout << 'v'; }
 						if (dir == 3) { cout << '<'; }
 						cout << " ";
-					} else if (printNums && maze[i][j].found){
+					} else if (printNums && maze[i][j].found) {
 						int x = maze[i][j].dist;
 						switch (numDigits(x)) {
 							case 1:
@@ -144,8 +144,8 @@ void Maze::print(int iCord, int jCord, int dir) {
 							cout << x;
 						} 
 					} else {
-						cout << "   ";
-					}
+ 						cout << "   ";
+ 					}
 				}
 			}
 			(k == 0) ? cout << "+" << endl : cout << "|" << endl;
